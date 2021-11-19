@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Welcome to the pet adopcion agency.</h1>
+    {% block greet%}
+    <p>Hi there! Below you'll see a list of pets to choose from. Choose wisely, there are no returns!</p>
+    {% endblock %}
+
+    {% block messages%}
+    {% for msg in get_flashed_messages()%}
+    {{msg}}
+    {% endfor %}
+    {% endblock %}
+
+    {% block show_pets %}
+    <ul>
+        {% for pet in all_pets %}
+        <li>{{pet.name}} is a {{pet.species}} <a href="/{{pet.id}}">Edit this pet's profile</a>
+
+            {% if pet.available %}
+            <p><b>Available</b></p>
+            {% endif %}
+            <img src="{{pet.photo_url}}" alt="{{pet.species}}" width=3%>
+        </li>
+
+        {% endfor %}
+    </ul>
+    {% endblock %}
+
+    {% block links%}
+    <a href="/add">Add a new pet for adoption!</a>
+    {% endblock %}
+</body>
+
+</html>
